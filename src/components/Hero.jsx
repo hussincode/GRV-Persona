@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useInView, useCounter, useMouseParallax } from "../hooks";
 import { STATS } from "../data";
+import branImg from '../Images/Icons/Bran.png';
+import folderImg from '../Images/Icons/folder.png';
+import courserImg from '../Images/Icons/Courser.png';
 
 /* ─────────────────────────────────────────
    ADD YOUR IMAGES HERE
@@ -8,9 +11,9 @@ import { STATS } from "../data";
    Example: src: "/hero/laptop.png"
 ───────────────────────────────────────── */
 const FLOAT_IMAGES = [
-  { src: "/src/Images/Icons/Bran.png", top: "8%",  left: "25%",   size: 300, delay: "0s",   dur: "6s",   px: 40,  py: -8,  rotate: "-12deg" },
-  { src: "/src/Images/Icons/folder.png", top: "50%",  right: "30%",  size: 100, delay: "0.5s", dur: "5s",   px: -14, py:  6,  rotate: "8deg"   },
-  { src: "/src/Images/Icons/Courser.png", top: "70%", left: "4%",   size: 150,  delay: "1s",   dur: "10s",   px:  8,  py:  12, rotate: "-5deg"  },
+  { src: branImg, top: "8%",  left: "25%",   size: 300, delay: "0s",   dur: "6s",   px: 40,  py: -8,  rotate: "-12deg" },
+  { src: folderImg, top: "50%",  right: "30%",  size: 100, delay: "0.5s", dur: "5s",   px: -14, py:  6,  rotate: "8deg"   },
+  { src: courserImg, top: "70%", left: "4%",   size: 150,  delay: "1s",   dur: "10s",   px:  8,  py:  12, rotate: "-5deg"  },
 ];
 
 

@@ -1,3 +1,7 @@
+import mohamedImg from '../Images/mohamed.jpeg';
+import roaaImg from '../Images/Roaa.jpeg';
+import yosefImg from '../Images/yosef.jpeg';
+
 export const COURSES = [
   { icon: "⚡", level: "Beginner → Pro", name: "Full-Stack Web Dev",       desc: "HTML, CSS, JS, React, Node.js & databases. Ship real products from day one.", weeks: "12 weeks", next: "Feb 10", color: "grv-sky" },
   { icon: "🤖", level: "Intermediate",   name: "AI & Machine Learning",    desc: "Python, TensorFlow, neural networks, and deploying ML models to production.", weeks: "10 weeks", next: "Mar 1",  color: "grv-light" },
@@ -8,16 +12,16 @@ export const COURSES = [
 ];
 
 export const FOUNDERS = [
-  { initials: "A", name: "Ahmed Karim",  role: "Founder & CEO", img: "src/Images/ahmed.jpeg",     info: ["Visionary & Lead Architect", "Full-Stack · 7+ yrs exp", "Built GRV from the ground up"],    isFounder: true },
-  { initials: "S", name: "Sara El-Nour", role: "Co-Founder & CTO", img: "src/Images/sara.jpeg",  info: ["Strategy & Growth Lead", "AI Engineer · 5+ yrs exp", "Co-architect of GRV curriculum"],     isFounder: true },
+  { initials: "A", name: "Ahmed Karim",  role: "Founder & CEO", img: null,     info: ["Visionary & Lead Architect", "Full-Stack · 7+ yrs exp", "Built GRV from the ground up"],    isFounder: true },
+  { initials: "S", name: "Sara El-Nour", role: "Co-Founder & CTO", img: null,  info: ["Strategy & Growth Lead", "AI Engineer · 5+ yrs exp", "Co-architect of GRV curriculum"],     isFounder: true },
 ];
 
 export const MEMBERS = [
-  { initials: "M", name: "Mohamed",   role: "Head of Education", img: "src/Images/mohamed.jpeg",  info: ["Curriculum Designer", "200+ students mentored", "EdTech veteran"] },
-  { initials: "R", name: "Roaa Mohamed",  role: "Vice HR", img: "src/Images/Roaa.jpeg",    info: ["Operations Manager", "Community Lead", "3+ yrs in EdTech ops"] },
-  { initials: "Y", name: "Youssef Hassan ",  role: "Head Video Editing", img: "src/Images/yosef.jpeg",     info: ["Platform & Infrastructure", "Cloud & DevOps expert", "Backend architect"] },
-  { initials: "N", name: "Nada Ahmed",  role: "Head Research", img: "src/Images/nadia.jpeg",  info: ["Brand & Design Lead", "UI/UX & Visual Identity", "Award-winning designer"] },
-  { initials: "Y", name: "Yousef Taleb", role: "Marketing Lead", img: "src/Images/yousef.jpeg",     info: ["Growth & Outreach", "Social & PR specialist", "Built GRV community"] },
+  { initials: "M", name: "Mohamed",   role: "Head of Education", img: mohamedImg,  info: ["Curriculum Designer", "200+ students mentored", "EdTech veteran"] },
+  { initials: "R", name: "Roaa Mohamed",  role: "Vice HR", img: roaaImg,    info: ["Operations Manager", "Community Lead", "3+ yrs in EdTech ops"] },
+  { initials: "Y", name: "Youssef Hassan ",  role: "Head Video Editing", img: yosefImg,     info: ["Platform & Infrastructure", "Cloud & DevOps expert", "Backend architect"] },
+  { initials: "N", name: "Nada Ahmed",  role: "Head Research", img: null,  info: ["Brand & Design Lead", "UI/UX & Visual Identity", "Award-winning designer"] },
+  { initials: "Y", name: "Yousef Taleb", role: "Marketing Lead", img: null,     info: ["Growth & Outreach", "Social & PR specialist", "Built GRV community"] },
 ];
 
 export const STATS = [
