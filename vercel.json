@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd grv-website && npm run build",
+  "installCommand": "cd grv-website && npm install",
+  "outputDirectory": "grv-website/dist",
+  "framework": "vite"
+}
