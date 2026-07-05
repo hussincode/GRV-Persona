@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ArrowRight, Users, Megaphone, TrendingUp, Camera, Palette, Code2, Calendar, GraduationCap, HeartHandshake, Sparkles } from "lucide-react";
+import { Reveal } from "@/components/reveal";
+import { PinnedJourney } from "@/components/pinned-journey";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,39 +57,85 @@ const partners = [
   { name: "Innovate MENA", type: "Sponsor" },
 ];
 
+/** Track vertical scroll for subtle hero parallax. */
+function useScrollY() {
+  const [y, setY] = useState(0);
+  useEffect(() => {
+    const onScroll = () => setY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return y;
+}
+
 function HomePage() {
+  const scrollY = useScrollY();
+  // Subtle parallax on the hero backdrop layers
+  const bgY = Math.min(scrollY * 0.35, 200);
+  const glowY = Math.min(scrollY * 0.15, 120);
+
   return (
-    <div>
+    <div className="overflow-x-clip">
       {/* HERO */}
       <section className="relative overflow-hidden">
+        {/* Parallax glow layers */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            transform: `translate3d(0, ${bgY}px, 0)`,
+            background:
+              "radial-gradient(1000px 600px at 50% -10%, oklch(0.55 0.19 250 / 0.35), transparent 60%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            transform: `translate3d(0, ${glowY}px, 0)`,
+            background:
+              "radial-gradient(700px 400px at 80% 20%, oklch(0.4 0.2 265 / 0.35), transparent 65%)",
+          }}
+        />
+
         <div className="container-page pt-24 pb-20 md:pt-32 md:pb-28 text-center">
-          <div className="eyebrow mx-auto">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
-            GRV Community 2026
-          </div>
-          <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight">
-            <span className="text-foreground">GRV </span>
-            <span className="text-gradient">Community</span>
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Empowering Youth Through Leadership, Volunteering, Innovation, and Personal Growth.
-          </p>
-          <p className="mt-3 text-sm text-muted-foreground max-w-xl mx-auto">
-            A youth-driven community dedicated to creating future leaders through volunteering, education, teamwork, and impactful projects.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/join" className="btn-primary">Join GRV</Link>
-            <Link to="/departments" className="btn-ghost">Explore Opportunities <ArrowRight className="h-4 w-4" /></Link>
-            <Link to="/team" className="btn-ghost">Meet The Team</Link>
-          </div>
+          <Reveal>
+            <div className="eyebrow mx-auto">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
+              GRV Community 2026
+            </div>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-foreground">GRV </span>
+              <span className="text-gradient">Community</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Empowering Youth Through Leadership, Volunteering, Innovation, and Personal Growth.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground max-w-xl mx-auto">
+              A youth-driven community dedicated to creating future leaders through volunteering, education, teamwork, and impactful projects.
+            </p>
+          </Reveal>
+          <Reveal delay={240}>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <Link to="/join" className="btn-primary">Join GRV</Link>
+              <Link to="/departments" className="btn-ghost">Explore Opportunities <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/team" className="btn-ghost">Meet The Team</Link>
+            </div>
+          </Reveal>
 
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-            {stats.map((s) => (
-              <div key={s.label} className="card-surface p-5 md:p-6 text-center">
-                <div className="text-3xl md:text-4xl font-bold text-brand font-display">{s.value}</div>
-                <div className="mt-1 text-[11px] tracking-widest uppercase text-muted-foreground">{s.label}</div>
-              </div>
+            {stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 80} y={20}>
+                <div className="card-surface p-5 md:p-6 text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-brand font-display">{s.value}</div>
+                  <div className="mt-1 text-[11px] tracking-widest uppercase text-muted-foreground">{s.label}</div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -94,105 +143,128 @@ function HomePage() {
 
       {/* DEPARTMENTS */}
       <section className="container-page py-20">
-        <div className="flex items-end justify-between gap-4 mb-10">
-          <div>
-            <div className="eyebrow">Departments</div>
-            <h2 className="mt-4 text-3xl md:text-5xl font-bold">9 teams, one mission</h2>
+        <Reveal>
+          <div className="flex items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="eyebrow">Departments</div>
+              <h2 className="mt-4 text-3xl md:text-5xl font-bold">9 teams, one mission</h2>
+            </div>
+            <Link to="/departments" className="text-brand text-sm font-semibold hover:underline whitespace-nowrap">
+              View all →
+            </Link>
           </div>
-          <Link to="/departments" className="text-brand text-sm font-semibold hover:underline whitespace-nowrap">
-            View all →
-          </Link>
-        </div>
+        </Reveal>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {departments.map((d) => (
-            <div key={d.name} className="card-surface p-6 group">
-              <div className="flex items-start gap-4">
-                <div className="h-11 w-11 rounded-xl grid place-items-center bg-[var(--gradient-cta)] text-white shadow-[var(--shadow-glow)] shrink-0">
-                  <d.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">{d.name}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{d.desc}</p>
+          {departments.map((d, i) => (
+            <Reveal key={d.name} delay={(i % 3) * 100} y={18}>
+              <div className="card-surface p-6 group h-full">
+                <div className="flex items-start gap-4">
+                  <div className="h-11 w-11 rounded-xl grid place-items-center bg-[var(--gradient-cta)] text-white shadow-[var(--shadow-glow)] shrink-0">
+                    <d.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">{d.name}</h3>
+                    <p className="mt-1.5 text-sm text-muted-foreground">{d.desc}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
+      {/* JOURNEY — pinned/sticky */}
+      <PinnedJourney />
+
       {/* SPEAKERS */}
       <section className="container-page py-20">
-        <div className="mb-10">
-          <div className="eyebrow">Speakers</div>
-          <h2 className="mt-4 text-3xl md:text-5xl font-bold">Voices shaping the next generation</h2>
-          <p className="mt-3 text-muted-foreground max-w-xl">A lineup of researchers, coaches, and builders sharing what actually moves the needle.</p>
-        </div>
+        <Reveal>
+          <div className="mb-10">
+            <div className="eyebrow">Speakers</div>
+            <h2 className="mt-4 text-3xl md:text-5xl font-bold">Voices shaping the next generation</h2>
+            <p className="mt-3 text-muted-foreground max-w-xl">A lineup of researchers, coaches, and builders sharing what actually moves the needle.</p>
+          </div>
+        </Reveal>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {speakers.map((s) => (
-            <div key={s.name} className="card-surface p-6">
-              <div className="h-16 w-16 rounded-2xl grid place-items-center bg-[var(--gradient-cta)] text-white font-display font-bold text-xl shadow-[var(--shadow-glow)]">
-                {s.initials}
+          {speakers.map((s, i) => (
+            <Reveal key={s.name} delay={i * 100} y={18}>
+              <div className="card-surface p-6 h-full">
+                <div className="h-16 w-16 rounded-2xl grid place-items-center bg-[var(--gradient-cta)] text-white font-display font-bold text-xl shadow-[var(--shadow-glow)]">
+                  {s.initials}
+                </div>
+                <div className="mt-4 text-xs uppercase tracking-widest text-brand">Speaker</div>
+                <h3 className="mt-2 text-lg font-semibold">{s.name}</h3>
+                <p className="text-sm text-muted-foreground">{s.role}</p>
+                <div className="mt-4 text-xs text-muted-foreground border-t border-border pt-3">{s.tag}</div>
               </div>
-              <div className="mt-4 text-xs uppercase tracking-widest text-brand">Speaker</div>
-              <h3 className="mt-2 text-lg font-semibold">{s.name}</h3>
-              <p className="text-sm text-muted-foreground">{s.role}</p>
-              <div className="mt-4 text-xs text-muted-foreground border-t border-border pt-3">{s.tag}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
-        <div className="mt-8">
-          <Link to="/speakers" className="btn-ghost">All speakers <ArrowRight className="h-4 w-4" /></Link>
-        </div>
+        <Reveal>
+          <div className="mt-8">
+            <Link to="/speakers" className="btn-ghost">All speakers <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* STORIES */}
       <section className="container-page py-20">
-        <div className="mb-10">
-          <div className="eyebrow">Success Stories</div>
-          <h2 className="mt-4 text-3xl md:text-5xl font-bold">Real volunteers. Real impact.</h2>
-        </div>
+        <Reveal>
+          <div className="mb-10">
+            <div className="eyebrow">Success Stories</div>
+            <h2 className="mt-4 text-3xl md:text-5xl font-bold">Real volunteers. Real impact.</h2>
+          </div>
+        </Reveal>
         <div className="grid gap-4 md:grid-cols-3">
-          {stories.map((s) => (
-            <div key={s.title} className="card-surface p-6">
-              <Sparkles className="h-5 w-5 text-brand" />
-              <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
-              <div className="mt-4 text-xs text-muted-foreground border-t border-border pt-3 flex items-center justify-between">
-                <span className="font-medium text-foreground">{s.who}</span>
-                <span>{s.tag}</span>
+          {stories.map((s, i) => (
+            <Reveal key={s.title} delay={i * 100} y={18}>
+              <div className="card-surface p-6 h-full">
+                <Sparkles className="h-5 w-5 text-brand" />
+                <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
+                <div className="mt-4 text-xs text-muted-foreground border-t border-border pt-3 flex items-center justify-between">
+                  <span className="font-medium text-foreground">{s.who}</span>
+                  <span>{s.tag}</span>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* PARTNERS */}
       <section className="container-page py-20">
-        <div className="text-center mb-10">
-          <div className="eyebrow mx-auto">Partners</div>
-          <h2 className="mt-4 text-3xl md:text-5xl font-bold">Trusted by communities & sponsors</h2>
-        </div>
+        <Reveal>
+          <div className="text-center mb-10">
+            <div className="eyebrow mx-auto">Partners</div>
+            <h2 className="mt-4 text-3xl md:text-5xl font-bold">Trusted by communities & sponsors</h2>
+          </div>
+        </Reveal>
         <div className="grid gap-3 grid-cols-2 md:grid-cols-5">
-          {partners.map((p) => (
-            <div key={p.name} className="card-surface p-6 text-center">
-              <div className="font-semibold">{p.name}</div>
-              <div className="text-xs text-muted-foreground mt-1">{p.type}</div>
-            </div>
+          {partners.map((p, i) => (
+            <Reveal key={p.name} delay={i * 80} y={16}>
+              <div className="card-surface p-6 text-center">
+                <div className="font-semibold">{p.name}</div>
+                <div className="text-xs text-muted-foreground mt-1">{p.type}</div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* CTA */}
       <section className="container-page py-20">
-        <div className="card-surface p-10 md:p-16 text-center relative overflow-hidden">
-          <div className="absolute inset-0 -z-10 opacity-70" style={{ background: "radial-gradient(500px 300px at 50% 0%, oklch(0.55 0.19 250 / 0.35), transparent 60%)" }} />
-          <h2 className="text-3xl md:text-5xl font-bold">Ready to build the future with us?</h2>
-          <p className="mt-4 text-muted-foreground max-w-xl mx-auto">Join 87+ volunteers shaping Egypt's most ambitious youth community.</p>
-          <div className="mt-8">
-            <Link to="/join" className="btn-primary">Become a Volunteer <ArrowRight className="h-4 w-4" /></Link>
+        <Reveal>
+          <div className="card-surface p-10 md:p-16 text-center relative overflow-hidden">
+            <div className="absolute inset-0 -z-10 opacity-70" style={{ background: "radial-gradient(500px 300px at 50% 0%, oklch(0.55 0.19 250 / 0.35), transparent 60%)" }} />
+            <h2 className="text-3xl md:text-5xl font-bold">Ready to build the future with us?</h2>
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">Join 87+ volunteers shaping Egypt's most ambitious youth community.</p>
+            <div className="mt-8">
+              <Link to="/join" className="btn-primary">Become a Volunteer <ArrowRight className="h-4 w-4" /></Link>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );
