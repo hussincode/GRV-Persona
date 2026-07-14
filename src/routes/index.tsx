@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "GRV Community — Growing Responsible Visionaries" },
-      { name: "description", content: "Empowering youth through leadership, volunteering, innovation, and personal growth. Join 87+ volunteers shaping Egypt's future." },
+      { name: "description", content: "Empowering youth through leadership, volunteering, innovation, and personal growth. Join 87+ volunteers shaping Egypt's GRV is an independent youth initiative dedicated to supporting and empowering young people through free educational and training opportunities. Our mission is to help youth develop their skills and build successful professional and personal futures.." },
       { property: "og:title", content: "GRV Community — Growing Responsible Visionaries" },
       { property: "og:description", content: "Empowering youth through leadership, volunteering, innovation, and personal growth." },
     ],
