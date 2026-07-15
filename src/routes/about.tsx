@@ -5,7 +5,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — GRV Community" },
-      { name: "description", content: "GRV is a youth-driven community dedicated to creating future leaders through volunteering, education, teamwork, and impact." },
+      { name: "description", content: "GRV (Grow Rise Venture) is an independent youth initiative dedicated to supporting and empowering young people through free educational and training opportunities. We strive to help youth develop their skills and build successful professional and personal futures." },
       { property: "og:title", content: "About — GRV Community" },
       { property: "og:description", content: "Growing Responsible Visionaries — our mission, vision, and values." },
     ],
@@ -30,22 +30,19 @@ function AboutPage() {
           <span className="text-gradient">Growing Responsible Visionaries</span>
         </h1>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-          A youth-driven community dedicated to creating future leaders through volunteering, education, teamwork, and impactful projects.
-        </p>
+GRV (Grow Rise Venture) is an independent youth initiative dedicated to supporting and empowering young people through free educational and training opportunities. We strive to help youth develop their skills and build successful professional and personal futures.        </p>
       </section>
 
       <section className="container-page grid gap-5 md:grid-cols-2 pb-20">
         <div className="card-surface p-8">
           <div className="eyebrow">Our Mission</div>
           <p className="mt-4 text-lg leading-relaxed">
-            Empower youth through volunteering, leadership, practical experience, and social impact — turning energy into real outcomes for communities across Egypt.
-          </p>
+           To provide free, practical educational and training opportunities that help young people discover their potential, develop their skills, and prepare for the job market through simple, effective learning experiences.          </p>
         </div>
         <div className="card-surface p-8">
           <div className="eyebrow">Our Vision</div>
           <p className="mt-4 text-lg leading-relaxed">
-            Become one of Egypt's most influential youth volunteer communities — known for the leaders we build and the impact we leave.
-          </p>
+           To become a leading youth platform that empowers young people, develops their skills, and creates a lasting positive impact on society.          </p>
         </div>
       </section>
 
