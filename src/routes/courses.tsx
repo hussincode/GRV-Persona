@@ -54,13 +54,7 @@ function CoursesPage() {
         </div>
       </section>
 
-      <section className="container-page pb-24">
-        <div className="card-surface p-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold">Want early access?</h2>
-          <p className="mt-3 text-muted-foreground max-w-md mx-auto">Join GRV to be first in line when the next cohort opens.</p>
-          <div className="mt-6"><Link to="/join" className="btn-primary">Apply to Join</Link></div>
-        </div>
-      </section>
+      
     </div>
   );
 }
